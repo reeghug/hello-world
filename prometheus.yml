@@ -1,0 +1,51 @@
+
+global:
+  scrape_interval: 60s
+  scrape_timeout: 60s
+  evaluation_interval: 1m
+  external_labels:
+    monitor: monitor
+scrape_configs:
+
+- job_name: ecs_node_exporter_discovery
+  honor_timestamps: true
+  scrape_interval: 60s
+  scrape_timeout: 60s
+  metrics_path: /metrics
+  scheme: http
+  ec2_sd_configs:
+  - endpoint: ""
+    region: ap-southeast-1
+    profile: arn:aws:iam::616035352558:instance-profile/alpha-ecs-hosts
+    refresh_interval: 1m
+    port: 9100
+    filters:
+    - name: tag:aws:autoscaling:groupName
+      values:
+      - preprod-v2-ecs-hosts
+- job_name: preprod-v2-prometheus-cadvisor
+  honor_timestamps: true
+  scrape_interval: 60s
+  scrape_timeout: 60s
+  metrics_path: /metrics
+  scheme: http
+  ec2_sd_configs:
+  - endpoint: ""
+    region: ap-southeast-1
+    profile: arn:aws:iam::616035352558:instance-profile/alpha-ecs-hosts
+    refresh_interval: 1m
+    port: 9200
+    filters:
+    - name: tag:aws:autoscaling:groupName
+      values:
+      - preprod-v2-ecs-hosts
+- job_name: app
+  honor_timestamps: true
+  scrape_interval: 60s
+  scrape_timeout: 60s
+  metrics_path: /monitoringLogs
+  scheme: http
+  file_sd_configs:
+  - files:
+    - /mnt/efs/data/ecs_file_sd.yml
+    refresh_interval: 1m
