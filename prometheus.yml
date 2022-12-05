@@ -2,9 +2,15 @@ global:
   scrape_interval: 5s
   external_labels:
     monitor: 'devopsage-monitor'
-server:    
-  remoteWrite:
-    - url: "https://aps-workspaces.ap-southeast-1.amazonaws.com/workspaces/ws-95fc630c-ffde-42e3-a1fa-6ed37a3bec08/api/v1/remote_write"
+remote_write:
+  -
+    url: https://aps-workspaces.ap-southeast-1.amazonaws.com/workspaces/ws-95fc630c-ffde-42e3-a1fa-6ed37a3bec08/api/v1/remote_write
+    queue_config:
+        max_samples_per_send: 1000
+        max_shards: 200
+        capacity: 2500
+    sigv4:
+         region: ap-southeast-1
 scrape_configs:
   - job_name: 'prometheus'
     static_configs:
