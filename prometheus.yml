@@ -5,6 +5,8 @@ global:
 remote_write:
   -
     url: https://aps-workspaces.ap-southeast-1.amazonaws.com/workspaces/ws-95fc630c-ffde-42e3-a1fa-6ed37a3bec08/api/v1/remote_write
+    sigv4:
+        region: ap-southeast-1
     queue_config:
         max_samples_per_send: 1000
         max_shards: 200
