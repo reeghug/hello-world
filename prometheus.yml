@@ -49,3 +49,8 @@ scrape_configs:
   - files:
     - /mnt/efs/data/ecs_file_sd.yml
     refresh_interval: 1m
+    
+  remote_read:
+    - url: "https://avnadmin:AVNS_vymMgzXvuCRrgBh_aUq@m3db-aa9ac2-raghu-42a6.aivencloud.com:28308/api/v1/prom/remote/read"
+      read_recent: true  
+    
