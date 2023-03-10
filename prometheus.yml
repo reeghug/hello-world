@@ -49,5 +49,16 @@ scrape_configs:
   - files:
     - /mnt/efs/data/ecs_file_sd.yml
     refresh_interval: 1m
+- job_name: "elasticsearch"
+     static_configs:
+        - targets: ["172.31.41.141:9100"]
+        - targets: ["172.31.41.148:9100"]
+        - targets: ["172.31.41.231:9100"]
+        - targets: ["172.31.33.143:9100"]
+        - targets: ["172.31.41.53:9100"]
+        - targets: ["172.31.42.9:9100"]
+        - targets: ["172.31.42.226:9100"]
+        - targets: ["172.31.42.179:9100"]    
+    
 
     
